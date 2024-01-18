@@ -1,0 +1,1 @@
+# lexicon-skola-med-objekt
