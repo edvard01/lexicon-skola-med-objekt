@@ -49,7 +49,13 @@ let svenska = {
     this.students.push(student);
     return;
   },
+  removeTeacher: function removeteacher() {
+    this.teacher = {};
+    return;
+  },
 };
+
+//quitSubject, removeTeacher, relegateStudent, fireTeacher
 
 //Students
 let anna = {
@@ -57,11 +63,24 @@ let anna = {
   age: 18,
   gender: "tjej",
   subjects: [],
-  enlistToSubject: function enlistToSubject(subject) {
+  enlistToSubject: function enlistToSubject(subject, student) {
     this.subjects.push(subject);
+    subject.addStudent(student);
     return;
   },
-  quitSubject: function quitSubject(subject) {},
+  quitSubject: function quitSubject(subject) {
+    for (let i = 0; i < this.subjects.length; i++) {
+      if (this.subjects[i].name === subject.name) {
+        this.subjects.splice(i, 1);
+      }
+    }
+
+    for (let j = 0; j < subject.students.length; j++) {
+      if (subject.students[j].name === this.name) {
+        subject.students.splice(j, 1);
+      }
+    }
+  },
 };
 
 let stellan = {
@@ -69,9 +88,23 @@ let stellan = {
   age: 18,
   gender: "kille",
   subjects: [],
-  enlistToSubject: function enlistToSubject(subject) {
+  enlistToSubject: function enlistToSubject(subject, student) {
     this.subjects.push(subject);
+    subject.addStudent(student);
     return;
+  },
+  quitSubject: function quitSubject(subject) {
+    for (let i = 0; i < this.subjects.length; i++) {
+      if (this.subjects[i].name === subject.name) {
+        this.subjects.splice(i, 1);
+      }
+    }
+
+    for (let j = 0; j < subject.students.length; j++) {
+      if (subject.students[j].name === this.name) {
+        subject.students.splice(j, 1);
+      }
+    }
   },
 };
 
@@ -80,9 +113,23 @@ let stella = {
   age: 19,
   gender: "tjej",
   subjects: [],
-  enlistToSubject: function enlistToSubject(subject) {
+  enlistToSubject: function enlistToSubject(subject, student) {
     this.subjects.push(subject);
+    subject.addStudent(student);
     return;
+  },
+  quitSubject: function quitSubject(subject) {
+    for (let i = 0; i < this.subjects.length; i++) {
+      if (this.subjects[i].name === subject.name) {
+        this.subjects.splice(i, 1);
+      }
+    }
+
+    for (let j = 0; j < subject.students.length; j++) {
+      if (subject.students[j].name === this.name) {
+        subject.students.splice(j, 1);
+      }
+    }
   },
 };
 
@@ -91,9 +138,23 @@ let mattias = {
   age: 18,
   gender: "kille",
   subjects: [],
-  enlistToSubject: function enlistToSubject(subject) {
+  enlistToSubject: function enlistToSubject(subject, student) {
     this.subjects.push(subject);
+    subject.addStudent(student);
     return;
+  },
+  quitSubject: function quitSubject(subject) {
+    for (let i = 0; i < this.subjects.length; i++) {
+      if (this.subjects[i].name === subject.name) {
+        this.subjects.splice(i, 1);
+      }
+    }
+
+    for (let j = 0; j < subject.students.length; j++) {
+      if (subject.students[j].name === this.name) {
+        subject.students.splice(j, 1);
+      }
+    }
   },
 };
 
@@ -102,9 +163,23 @@ let hugo = {
   age: 19,
   gender: "kille",
   subjects: [],
-  enlistToSubject: function enlistToSubject(subject) {
+  enlistToSubject: function enlistToSubject(subject, student) {
     this.subjects.push(subject);
+    subject.addStudent(student);
     return;
+  },
+  quitSubject: function quitSubject(subject) {
+    for (let i = 0; i < this.subjects.length; i++) {
+      if (this.subjects[i].name === subject.name) {
+        this.subjects.splice(i, 1);
+      }
+    }
+
+    for (let j = 0; j < subject.students.length; j++) {
+      if (subject.students[j].name === this.name) {
+        subject.students.splice(j, 1);
+      }
+    }
   },
 };
 
