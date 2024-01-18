@@ -61,6 +61,7 @@ let anna = {
     this.subjects.push(subject);
     return;
   },
+  quitSubject: function quitSubject(subject) {},
 };
 
 let stellan = {
