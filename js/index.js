@@ -233,6 +233,32 @@ let hugo = {
   },
 };
 
+//grades
+
+let betygMatematik = {
+  subject: "Matematik",
+  mvg: [],
+  vg: [],
+  g: [],
+  ig: [],
+};
+
+let betygIdrott = {
+  subject: "Idrott",
+  mvg: [],
+  vg: [],
+  g: [],
+  ig: [],
+};
+
+let betygSvenska = {
+  subject: "Svenska",
+  mvg: [],
+  vg: [],
+  g: [],
+  ig: [],
+};
+
 //Teachers
 let sara = {
   name: "Sara",
