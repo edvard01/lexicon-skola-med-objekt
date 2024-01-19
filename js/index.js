@@ -6,6 +6,33 @@ let lexicon = {
   city: "göteborg",
   students: [],
   teachers: [],
+  relegateStudent: function relegateStudent(student) {
+    let index = this.students.indexOf(student);
+    this.students.splice(index, 1);
+
+    student.subjects.forEach((element) => {
+      element.removeStudent(student);
+    });
+  },
+  fireTeacher: function fireTeacher(teacher) {
+    let index = this.teachers.indexOf(teacher);
+    this.teachers.splice(index, 1);
+
+    teacher.subjects.forEach((element) => {
+      console.log(`${teacher.name} ÄR LÄRARE FÖR ${element.name}`);
+      element.removeTeacher();
+    });
+  },
+  initStudent: function initStudent(students) {
+    students.forEach((element) => {
+      this.students.push(element);
+    });
+  },
+  initTeacher: function initTeacher(teachers) {
+    teachers.forEach((element) => {
+      this.teachers.push(element);
+    });
+  },
 };
 
 //Subjects
@@ -21,6 +48,15 @@ let matematik = {
     this.students.push(student);
     return;
   },
+  removeTeacher: function removeteacher() {
+    this.teacher.quitSubject(matematik);
+    this.teacher = {};
+    return;
+  },
+  removeStudent: function removeStudent(student) {
+    let index = this.students.indexOf(student);
+    this.students.splice(index, 1);
+  },
 };
 
 let idrott = {
@@ -34,6 +70,15 @@ let idrott = {
   addStudent: function addStudent(student) {
     this.students.push(student);
     return;
+  },
+  removeTeacher: function removeteacher() {
+    this.teacher.quitSubject(idrott);
+    this.teacher = {};
+    return;
+  },
+  removeStudent: function removeStudent(student) {
+    let index = this.students.indexOf(student);
+    this.students.splice(index, 1);
   },
 };
 
@@ -50,12 +95,15 @@ let svenska = {
     return;
   },
   removeTeacher: function removeteacher() {
+    this.teacher.quitSubject(svenska);
     this.teacher = {};
     return;
   },
+  removeStudent: function removeStudent(student) {
+    let index = this.students.indexOf(student);
+    this.students.splice(index, 1);
+  },
 };
-
-//quitSubject, removeTeacher, relegateStudent, fireTeacher
 
 //Students
 let anna = {
@@ -66,7 +114,7 @@ let anna = {
   enlistToSubject: function enlistToSubject(subject, student) {
     this.subjects.push(subject);
     subject.addStudent(student);
-    return;
+    return subject;
   },
   quitSubject: function quitSubject(subject) {
     for (let i = 0; i < this.subjects.length; i++) {
@@ -80,6 +128,7 @@ let anna = {
         subject.students.splice(j, 1);
       }
     }
+    return subject;
   },
 };
 
@@ -91,7 +140,7 @@ let stellan = {
   enlistToSubject: function enlistToSubject(subject, student) {
     this.subjects.push(subject);
     subject.addStudent(student);
-    return;
+    return subject;
   },
   quitSubject: function quitSubject(subject) {
     for (let i = 0; i < this.subjects.length; i++) {
@@ -105,6 +154,7 @@ let stellan = {
         subject.students.splice(j, 1);
       }
     }
+    return subject;
   },
 };
 
@@ -116,7 +166,7 @@ let stella = {
   enlistToSubject: function enlistToSubject(subject, student) {
     this.subjects.push(subject);
     subject.addStudent(student);
-    return;
+    return subject;
   },
   quitSubject: function quitSubject(subject) {
     for (let i = 0; i < this.subjects.length; i++) {
@@ -130,6 +180,7 @@ let stella = {
         subject.students.splice(j, 1);
       }
     }
+    return subject;
   },
 };
 
@@ -141,7 +192,7 @@ let mattias = {
   enlistToSubject: function enlistToSubject(subject, student) {
     this.subjects.push(subject);
     subject.addStudent(student);
-    return;
+    return subject;
   },
   quitSubject: function quitSubject(subject) {
     for (let i = 0; i < this.subjects.length; i++) {
@@ -155,6 +206,7 @@ let mattias = {
         subject.students.splice(j, 1);
       }
     }
+    return subject;
   },
 };
 
@@ -166,7 +218,7 @@ let hugo = {
   enlistToSubject: function enlistToSubject(subject, student) {
     this.subjects.push(subject);
     subject.addStudent(student);
-    return;
+    return subject;
   },
   quitSubject: function quitSubject(subject) {
     for (let i = 0; i < this.subjects.length; i++) {
@@ -180,6 +232,7 @@ let hugo = {
         subject.students.splice(j, 1);
       }
     }
+    return subject;
   },
 };
 
@@ -189,7 +242,15 @@ let sara = {
   subjects: [],
   addSubject: function (subject) {
     this.subjects.push(subject);
-    return teacher;
+    return subject;
+  },
+  quitSubject: function quitSubject(subject) {
+    for (let i = 0; i < this.subjects.length; i++) {
+      if (this.subjects[i].name === subject.name) {
+        this.subjects.splice(i, 1);
+      }
+    }
+    return subject;
   },
 };
 
@@ -198,7 +259,15 @@ let bo = {
   subjects: [],
   addSubject: function (subject) {
     this.subjects.push(subject);
-    return;
+    return subject;
+  },
+  quitSubject: function quitSubject(subject) {
+    for (let i = 0; i < this.subjects.length; i++) {
+      if (this.subjects[i].name === subject.name) {
+        this.subjects.splice(i, 1);
+      }
+    }
+    return subject;
   },
 };
 
@@ -219,3 +288,8 @@ function addSubjectToTeacher(subject, teacher) {
 }
 
 console.log(addSubjectToTeacher(idrott, sara));
+
+lexicon.initStudent([anna, stellan, stella, mattias, hugo]);
+lexicon.initTeacher([sara, bo]);
+
+console.log(lexicon);
