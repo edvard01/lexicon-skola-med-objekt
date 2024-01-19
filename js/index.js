@@ -49,7 +49,6 @@ let matematik = {
     return;
   },
   removeTeacher: function removeteacher() {
-    this.teacher.quitSubject(matematik);
     this.teacher = {};
     return;
   },
@@ -72,7 +71,6 @@ let idrott = {
     return;
   },
   removeTeacher: function removeteacher() {
-    this.teacher.quitSubject(idrott);
     this.teacher = {};
     return;
   },
@@ -95,7 +93,6 @@ let svenska = {
     return;
   },
   removeTeacher: function removeteacher() {
-    this.teacher.quitSubject(svenska);
     this.teacher = {};
     return;
   },
@@ -242,6 +239,7 @@ let sara = {
   subjects: [],
   addSubject: function (subject) {
     this.subjects.push(subject);
+    subject.teacher = sara;
     return subject;
   },
   quitSubject: function quitSubject(subject) {
@@ -250,6 +248,7 @@ let sara = {
         this.subjects.splice(i, 1);
       }
     }
+    subject.removeTeacher();
     return subject;
   },
 };
@@ -259,6 +258,7 @@ let bo = {
   subjects: [],
   addSubject: function (subject) {
     this.subjects.push(subject);
+    subject.teacher = sara;
     return subject;
   },
   quitSubject: function quitSubject(subject) {
@@ -267,29 +267,86 @@ let bo = {
         this.subjects.splice(i, 1);
       }
     }
+    subject.removeTeacher();
     return subject;
   },
 };
 
-bo.subjects.push(matematik);
-console.log(`${bo.name} är lärare i ämnet: ${bo.subjects[0].name}`);
+// bo.subjects.push(matematik);
+// console.log(`${bo.name} är lärare i ämnet: ${bo.subjects[0].name}`);
 
 //Det som är bra med objekt är ju att all data är samlad på samma ställe,
 //ifall en admin vill ha information på en lärare vet de vilken syntax de ska använda för att nå datan.
 //Det är även logiskt och alla lärare samt elever får likadan struktur.
 
-stella.subjects.push(matematik);
-console.log(`${stella.name} går i ${stella.subjects[0].name}`);
+// stella.subjects.push(matematik);
+// console.log(`${stella.name} går i ${stella.subjects[0].name}`);
 
-function addSubjectToTeacher(subject, teacher) {
-  subject.teacher = teacher;
-  teacher.subjects.push(subject);
-  return teacher;
-}
+// function addSubjectToTeacher(subject, teacher) {
+//   subject.teacher = teacher;
+//   teacher.subjects.push(subject);
+//   return teacher;
+// }
 
-console.log(addSubjectToTeacher(idrott, sara));
+// console.log(addSubjectToTeacher(idrott, sara));
+
+sara.addSubject(matematik);
+sara.addSubject(idrott);
+bo.addSubject(svenska);
+
+anna.enlistToSubject(matematik, anna);
+stellan.enlistToSubject(svenska, stellan);
+stella.enlistToSubject(idrott, stella);
+mattias.enlistToSubject(matematik, mattias);
+mattias.enlistToSubject(svenska, mattias);
+mattias.enlistToSubject(idrott, mattias);
 
 lexicon.initStudent([anna, stellan, stella, mattias, hugo]);
 lexicon.initTeacher([sara, bo]);
 
-console.log(lexicon);
+function displayAllStudents(school) {
+  for (key in school.students) {
+    console.log(school.students[key]);
+  }
+  return school;
+}
+
+function displayAllSubjectsOfStudent(student) {
+  if (!student.subjects.length) {
+    return "Student isn't signed up for any subjects.";
+  }
+  for (key in student.subjects) {
+    console.log(student.subjects[key]);
+  }
+
+  return student;
+}
+
+function displayAllStudentsEnlistedToSubject(subject) {
+  if (!subject.students.length) {
+    return "No students are signed up to this subject.";
+  }
+  for (key in subject.students) {
+    console.log(subject.students[key]);
+  }
+  return subject;
+}
+
+function displayAllTeachers(school) {
+  for (key in school.teachers) {
+    console.log(school.teachers[key]);
+  }
+  return school;
+}
+
+console.log("----All Students----");
+console.log(displayAllStudents(lexicon));
+
+console.log("displayAllSubjectsOfStudent");
+console.log(displayAllSubjectsOfStudent(mattias));
+
+console.log("displayAllStudentsEnlistedToSubject");
+console.log(displayAllStudentsEnlistedToSubject(matematik));
+
+console.log("displayAllTeachers");
+console.log(displayAllTeachers(lexicon));
